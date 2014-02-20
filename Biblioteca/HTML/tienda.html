@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ejercicio</title>
+<script type="text/javascript">
+	function validar(f) {
+		if (isNaN(f.value)) {
+			alert("Sólo se pueden introducir números.");
+			f.focus();
+			return (false);
+		}
+		if (f.value>99 || f.value<1) {
+			alert("Sólo se pueden introducir números entre 1 y 99.");
+			f.focus();
+			return (false);
+		}
+		return (true);
+	}
+	function mostrar(id) {
+		try {
+			dvds = document.getElementById("cantidad1");
+			camaras = document.getElementById("cantidad2");
+			portatiles = document.getElementById("cantidad3");
+			
+			if (validar(dvds) && validar(camaras) && validar(portatiles) ){			
+				numeroDvds = parseInt(dvds.value);
+				numeroCamaras = parseInt(camaras.value);
+				numeroPortatiles = parseInt(portatiles.value);
+	
+				TotalArticulos = (numeroDvds + numeroCamaras + numeroPortatiles);
+	
+				document.getElementById("campoCantidadTotal").innerHTML = "Cantidad total: "
+						+ TotalArticulos;
+			} else 
+				throw new Error( "HORROR!!!" );
+				// esta excepción nunca se verá así con ese texto, pero lo hago así porque aprovecho el catch para esto y a la vez otra cosa rara que pudiera pasar.			
+		} catch (exception) {
+			document.getElementById("campoCantidadTotal").innerHTML = "Error en las cantidades";
+		}
+
+	};
+</script>
+
+<style>
+body{
+}
+
+
+table {
+	border: 1px solid black;
+	border-color: blue;
+}
+
+table th {
+	width: 5em;
+}
+
+#cabecera {
+	text-align: center;
+}
+
+#tablaArticulo {
+	text-align: right;
+	font-weight: bold
+}
+
+#tablaArticulo tr:last-child td {
+	text-align: center;
+}
+
+#tablaTotal {
+	margin: 0 auto;
+	text-align: center;
+	width: 11em;
+	height: 2em;	
+}
+
+.caja {
+	width: 3em;
+}
+</style>
+
+</head>
+<body>
+	<div>
+		<div id="cabecera">
+			<h1>Tienda de equipos electrónicos</h1>
+		</div>
+		<div id="contenido">
+			<form>
+				<table id="tablaArticulo" class="tabla" align="center">
+					<tr>
+						<th>Artículo</th>
+						<th>Precio</th>
+						<th>Cantidad</th>
+					</tr>
+					<tr>
+						<td>DVD</td>
+						<td>230 €</td>
+						<td><input class="caja" type="text" id="cantidad1"
+							maxlength="3" value="1"></td>
+					</tr>
+					<tr>
+						<td>Cámaras</td>
+						<td>60 €</td>
+						<td><input class="caja" type="text" id="cantidad2"
+							maxlength="3" value="1"></td>
+					</tr>
+					<tr>
+						<td>Portátiles</td>
+						<td>599 €</td>
+						<td><input class="caja" type="text" id="cantidad3"
+							maxlength="3" value="1"></td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="reset" value="Borrar"> <input
+							type="button" value="Calcular cantidad" onclick="mostrar()"></td>
+					</tr>
+				</table>
+				<br />
+				<table id="tablaTotal" class="tabla" align="center">
+					<tr>
+						<td id="campoCantidadTotal"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div>Esta es la versión opcional ;)</div>
+	</div>
+</body>
+</html>
